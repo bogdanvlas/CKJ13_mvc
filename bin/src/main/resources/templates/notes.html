@@ -6,23 +6,12 @@
 </head>
 <body>
 	<h1>Notes list</h1>
-	<a href="/notes/create">Create new note</a>
+	<a href="/create">Create new note</a>
 	<div th:each="note : ${notes}">
 		<div>-------------</div>
 		<div th:text="${note.id}"></div>
 		<div th:text="${note.title}"></div>
 		<div th:text="${note.message}"></div>
-		<div>
-			<div>
-				<a th:href="@{/notes/{n}(n=${note.id})}">Info</a>
-			</div>
-			<div>
-				<a th:href="@{/notes/delete/{n}(n=${note.id})}">Delete</a>
-			</div>
-			<div>
-				<a th:href="@{/notes/edit/{n}(n=${note.id})}">Edit</a>
-			</div>
-		</div>
 		<div>-------------</div>
 	</div>
 </body>

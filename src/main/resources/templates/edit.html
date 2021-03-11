@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit</title>
+</head>
+<body>
+	<h2>Edit note</h2>
+	<form action="/notes/change" th:object="${note}" method="post">
+		<div>
+			<input th:field="*{title}" type="text" placeholder="title">
+		</div>
+		<div>
+			<textarea th:field="*{message}" placeholder="message"></textarea>
+		</div>
+		<input type="submit" value="Apply">
+	</form>
+</body>
+</html>
