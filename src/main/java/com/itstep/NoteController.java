@@ -1,5 +1,7 @@
 package com.itstep;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/notes")
@@ -56,4 +59,19 @@ public class NoteController {
 		return "edit";
 	}
 
+	@PostMapping("/change")
+	public String change(@ModelAttribute("note") Note note) {
+		// если такого ид нет, добавляет новую запись
+		// если есть, редактирует существующую
+		noteRepository.save(note);
+		return "redirect:/notes";
+	}
+
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "word") String word, Model model) {
+//		List<Note> notes = noteRepository.findByTitleContainingOrMessageContaining(word, word);
+		List<Note> notes = noteRepository.search("%" + word + "%");
+		model.addAttribute("notes", notes);
+		return "notes";
+	}
 }

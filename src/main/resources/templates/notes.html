@@ -5,6 +5,9 @@
 <title>Notes list</title>
 </head>
 <body>
+	<form action="/notes/search">
+		<input type="text" name="word">
+	</form>
 	<h1>Notes list</h1>
 	<a href="/notes/create">Create new note</a>
 	<div th:each="note : ${notes}">

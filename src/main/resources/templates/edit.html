@@ -7,6 +7,7 @@
 <body>
 	<h2>Edit note</h2>
 	<form action="/notes/change" th:object="${note}" method="post">
+		<input th:field="*{id}" hidden>
 		<div>
 			<input th:field="*{title}" type="text" placeholder="title">
 		</div>
