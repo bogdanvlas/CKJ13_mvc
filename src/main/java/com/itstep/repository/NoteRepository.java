@@ -1,4 +1,4 @@
-package com.itstep;
+package com.itstep.repository;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import com.itstep.model.Note;
 
 //описывает функциональность NoteDao
 //унаследовал базовые CRUD-методы от CrudRepository

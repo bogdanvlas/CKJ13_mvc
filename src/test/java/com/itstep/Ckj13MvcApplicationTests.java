@@ -11,7 +11,7 @@ class Ckj13MvcApplicationTests {
 	@Test
 	void testPasswordEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		String str = "user";
+		String str = "admin";
 		System.out.println("Encoded string: " + str);
 		System.out.println(encoder.encode(str));
 	}

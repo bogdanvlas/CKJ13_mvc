@@ -12,7 +12,6 @@
 	<a href="/notes/create">Create new note</a>
 	<div th:each="note : ${notes}">
 		<div>-------------</div>
-		<div th:text="${note.id}"></div>
 		<div th:text="${note.title}"></div>
 		<div th:text="${note.message}"></div>
 		<div>

@@ -1,5 +1,6 @@
-package com.itstep;
+package com.itstep.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.itstep.model.Note;
+import com.itstep.repository.NoteRepository;
 
 @Controller
 @RequestMapping("/notes")
@@ -29,6 +33,7 @@ public class NoteController {
 
 	@PostMapping("/add")
 	public String add(@ModelAttribute(name = "note") Note note) {
+		note.setCreationDate(LocalDateTime.now());
 		noteRepository.save(note);
 		return "redirect:/notes";
 	}

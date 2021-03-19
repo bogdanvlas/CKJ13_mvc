@@ -1,4 +1,4 @@
-package com.itstep;
+package com.itstep.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,14 +10,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-//get, set, equals, hashCode, toString
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Note {
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String title;
-	private String message;
+	private String username;
+	private String password;
+	private String role;
 }
