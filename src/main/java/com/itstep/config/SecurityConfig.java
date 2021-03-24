@@ -24,33 +24,37 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 
-	//настраиваем АВТОРИЗАЦИЮ
+	// настраиваем АВТОРИЗАЦИЮ
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/").permitAll()
-		.antMatchers("/notes/**").authenticated()
-		.antMatchers("/admin_page/**").hasAuthority("ROLE_ADMIN")
-		.and()
-		.formLogin()
-		.and()
-		.logout()
-		.and()
-		.csrf().disable();
+				.antMatchers("/").permitAll()
+				.antMatchers("/notes/**").authenticated()
+				.antMatchers("/admin_page/**").hasAuthority("ROLE_ADMIN")
+				.and()
+				.formLogin().loginPage("/login")
+				.and()
+				.logout()
+				.and()
+				.rememberMe().userDetailsService(detailsService)
+				.and()
+				.exceptionHandling().accessDeniedPage("/login?denied")
+				.and()
+				.csrf().disable();
 	}
-	
-	//UserDetailsService - по username получает UserDetails
-	//AuthenticationProvider - предоставляет информацию для аутентификации
-	//AuthenticationManager - управляет процессом аутентификации
+
+	// UserDetailsService - по username получает UserDetails
+	// AuthenticationProvider - предоставляет информацию для аутентификации
+	// AuthenticationManager - управляет процессом аутентификации
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(detailsService);
 		provider.setPasswordEncoder(passwordEncoder());
-		
+
 		auth.authenticationProvider(provider);
 	}
-	
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
