@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Admin page</title>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:insert="index :: headerfile">
 </head>
 <body>
+	<div th:insert="index :: menu"></div>
 	<h1>This is page for ADMIN!!!!</h1>
 	<h2>Simple users can not visit this page</h2>
 </body>

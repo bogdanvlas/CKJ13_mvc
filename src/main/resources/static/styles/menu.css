@@ -1,2 +1,17 @@
 @charset "UTF-8";
 
+.menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.menu a {
+	display: block;
+	margin: 10px;
+}

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Notes list</title>
+<head th:insert="index :: headerfile">
 </head>
 <body>
+	<div th:insert="index :: menu"></div>
 	<form action="/notes/search">
 		<input type="text" name="word">
 	</form>
