@@ -18,7 +18,8 @@ public interface NoteRepository extends CrudRepository<Note, Integer> {
 //	List<Note> findByTitleContainingOrMessageContaining(String word1, String word2);
 
 	// SELECT * FROM note WHERE title LIKE '%word%' OR message LIKE '%word%'
-	@Query("SELECT n FROM Note n WHERE n.title LIKE :word OR n.message LIKE :word")
-	List<Note> search(@Param("word") String word);
+	@Query("SELECT n FROM Note n WHERE n.user.id = :userId AND "
+			+ "(n.title LIKE :word OR n.message LIKE :word)")
+	List<Note> search(@Param("word") String word, @Param("userId") int userId);
 
 }

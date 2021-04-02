@@ -74,8 +74,12 @@ public class NoteController {
 	}
 
 	@GetMapping("/delete/{id}")
-	public String delete(@PathVariable(name = "id") int id) {
-		noteRepository.deleteById(id);
+	public String delete(@PathVariable(name = "id") int id, Principal prl) {
+		User user = userRepository.findByUsername(prl.getName());
+		Note note = noteRepository.findById(id).get();
+		if (user.getNotes().contains(note)) {
+			noteRepository.deleteById(id);
+		}
 		return "redirect:/notes";
 	}
 
@@ -94,9 +98,11 @@ public class NoteController {
 	}
 
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "word") String word, Model model) {
-//		List<Note> notes = noteRepository.findByTitleContainingOrMessageContaining(word, word);
-		List<Note> notes = noteRepository.search("%" + word + "%");
+	public String search(@RequestParam(name = "word") String word, Model model,
+			Principal prl) {
+		User user = userRepository.findByUsername(prl.getName());
+		word = "%" + word + "%";
+		List<Note> notes = noteRepository.search(word, user.getId());
 		model.addAttribute("notes", notes);
 		return "notes";
 	}

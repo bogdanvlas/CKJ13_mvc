@@ -19,7 +19,7 @@ public class UserService {
 		this.passwordEncoder = passwordEncoder;
 	}
 
-	public User register(String username, String password) {
+	public User register(String username, String password, String email) {
 		// 1. Проверить, что юзернейм свободен
 		User user = userRepository.findByUsername(username);
 		if (user == null) {
@@ -30,6 +30,9 @@ public class UserService {
 			user.setPassword(passwordEncoder.encode(password));
 			// Присвоить роль ROLE_USER
 			user.setRole("ROLE_USER");
+			user.setEmail(email);
+			// делаем НЕАКТИВНЫМ
+			user.setEnabled(false);
 			// сохранить пользователя в базе и вернуть из метода
 			return userRepository.save(user);
 		} else {
