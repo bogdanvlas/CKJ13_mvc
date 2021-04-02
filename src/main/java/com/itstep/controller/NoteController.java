@@ -1,5 +1,6 @@
 package com.itstep.controller;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,16 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itstep.model.Note;
+import com.itstep.model.User;
 import com.itstep.repository.NoteRepository;
+import com.itstep.repository.UserRepository;
 
 @Controller
 @RequestMapping("/notes")
 public class NoteController {
 	private NoteRepository noteRepository;
 
+	private UserRepository userRepository;
+
 	@Autowired
-	public NoteController(NoteRepository noteRepository) {
+	public NoteController(NoteRepository noteRepository, UserRepository userRepository) {
 		this.noteRepository = noteRepository;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("/create")
@@ -32,24 +38,39 @@ public class NoteController {
 	}
 
 	@PostMapping("/add")
-	public String add(@ModelAttribute(name = "note") Note note) {
+	public String add(@ModelAttribute(name = "note") Note note, Principal prl) {
+		User user = userRepository.findByUsername(prl.getName());
+
 		note.setCreationDate(LocalDateTime.now());
+
+		user.addNote(note);
 		noteRepository.save(note);
+		userRepository.save(user);
+
 		return "redirect:/notes";
 	}
 
 	@GetMapping
-	public String all(Model model) {
-		model.addAttribute("notes", noteRepository.findAll());
+	public String all(Model model, Principal prl) {
+		User user = userRepository.findByUsername(prl.getName());
+		List<Note> notes = user.getNotes();
+		System.out.println(notes);
+		model.addAttribute("notes", user.getNotes());
 		return "notes";
 	}
 
 	@GetMapping("/{id}")
-	public String info(@PathVariable(name = "id") int id, Model model) {
+	public String info(@PathVariable(name = "id") int id, Model model, Principal prl) {
+		User user = userRepository.findByUsername(prl.getName());
+		List<Note> notes = user.getNotes();
 		// ищем объект по ид
 		Note note = noteRepository.findById(id).get();
-		model.addAttribute("note", note);
-		return "info";
+		if (notes.contains(note)) {
+			model.addAttribute("note", note);
+			return "info";
+		} else {
+			return "redirect:/notes";
+		}
 	}
 
 	@GetMapping("/delete/{id}")

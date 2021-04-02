@@ -57,7 +57,8 @@ public class HomeController {
 	}
 
 	@PostMapping("/signup")
-	public String registerNewUser(@RequestParam("username") String username, @RequestParam("password") String password,
+	public String registerNewUser(@RequestParam("username") String username, 
+			@RequestParam("password") String password,
 			HttpServletRequest request) {
 		try {
 			userService.register(username, password);
