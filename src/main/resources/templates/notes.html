@@ -18,7 +18,8 @@
 				<a th:href="@{/notes/{n}(n=${note.id})}">Info</a>
 			</div>
 			<div>
-				<a th:href="@{/notes/delete/{n}(n=${note.id})}">Delete</a>
+				<a th:href="@{/notes/delete/{n}(n=${note.id})}"
+				onclick="return confirm('Delete?')">Delete</a>
 			</div>
 			<div>
 				<a th:href="@{/notes/edit/{n}(n=${note.id})}">Edit</a>

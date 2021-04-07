@@ -7,20 +7,31 @@
 <body>
 	<div th:if="${param.error}">Enter another username!</div>
 	<h1>Please sign up!!!!</h1>
-	<form action="/signup" method="post">
+	<form action="/signup" method="post" onsubmit="return checkForm()">
 		<div>
-			<input type="text" name="username" placeholder="Username">
+			Username: <input type="text" name="username" placeholder="Username"
+				required="required" pattern="[A-Za-z]+">
 		</div>
 		<div>
-			<input type="password" name="password" placeholder="Pasword">
+			Password: 
+			<input type="password" name="password" id="psw"
+				placeholder="Pasword" required="required">
 		</div>
 		<div>
-			<input type="email" name="email" placeholder="Email">
+			Confirm password: 
+			<input type="password" id="confirm-psw"
+				placeholder="Confirm password">
+		</div>
+		<div>
+			Email: <input type="email" name="email" placeholder="Email"
+				required="required">
 		</div>
 		<div>
 			<input type="submit" value="Sign Up">
 		</div>
 	</form>
+	<script type="text/javascript" src="/scripts/check.js">
+	</script>
 	<a href="/login">Do you have an account? Sign in</a>
 </body>
 </html>

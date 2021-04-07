@@ -29,7 +29,7 @@ class Ckj13MvcApplicationTests {
 		mail.setText(text);
 		mail.setSubject("Test email");
 
-		System.out.println("Try to send mail");
+		System.out.println("Try to send mail from " + Thread.currentThread().getName());
 		mailService.sendMail(mail);
 		System.out.println("Test done!");
 	}
