@@ -5,6 +5,22 @@
 <title>My application</title>
 <link rel="stylesheet" href="/styles/menu.css">
 </head>
+<style>
+.btn1 {
+	width: 80px;
+	height: 20px;
+	padding: 20px;
+	color: white;
+}
+
+.active {
+	background: lightgreen;
+}
+
+.disabled {
+	background: red;
+}
+</style>
 <body>
 	<div class="menu" th:fragment="menu">
 		<div class="row">
@@ -30,9 +46,17 @@
 			</div>
 		</div>
 	</div>
-	<div>
+
+	<div class="first">
 		<h1 th:unless="${message}">This is home page</h1>
 		<h1 th:text="${message}"></h1>
 	</div>
+	<div id="el1">
+		<div id="el2">First</div>
+		<div id="el3">Second</div>
+	</div>
+	<script type="text/javascript" src="/scripts/button.js">
+		
+	</script>
 </body>
 </html>
