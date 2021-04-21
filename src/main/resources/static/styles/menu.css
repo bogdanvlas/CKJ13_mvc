@@ -15,3 +15,18 @@
 	display: block;
 	margin: 10px;
 }
+
+.items {
+	display: flex;
+	flex-direction: column;
+}
+
+.item {
+	padding: 10px;
+	padding-bottom: 40px;
+	margin: 10px;
+	border: 1px solid black;
+	margin: 10px;
+	width: 400px;
+	margin: 10px;
+}
