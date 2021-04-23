@@ -27,14 +27,33 @@ async function fillNotes() {
 		let message = document.createElement("div")
 		message.innerText = n.message
 		let infoRef = document.createElement("a")
-		infoRef.href  = n.links[0].href
+		infoRef.href = n.links[0].href
 		infoRef.innerText = "Info"
+
+		let deleteRef = document.createElement("a")
+		deleteRef.href = n.links[0].href
+		deleteRef.innerText = "Delete"
+
+		deleteRef.addEventListener("click", deleteNote)
+	
+
 		elem.appendChild(title)
 		elem.appendChild(message)
 		elem.appendChild(infoRef)
+		elem.appendChild(deleteRef)
 		elem.classList.add("item")
 		root.appendChild(elem)
 	})
 }
+
+async function deleteNote(event) {
+	if (confirm('Delete note?')) {
+		let url = event.target.href
+		let response = await fetch(url, {
+			method: "DELETE"
+		})
+	}
+}
+
 
 fillNotes()
